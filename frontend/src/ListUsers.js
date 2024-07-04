@@ -5,7 +5,7 @@ function ListUsers() {
     const [users, setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState(null);
     const [editForm, setEditForm] = useState({ name: '', email: '', password: '' });
-        // log
+        
     const handleEditClick = (user) => {
         if (selectedUser && selectedUser._id === user._id) {
             setSelectedUser(null);
@@ -59,6 +59,10 @@ function ListUsers() {
         }
     };
 
+    const handleDeleteClick = (userId) => {
+        setUsers((prevUsers) => prevUsers.filter((user) => user._id !== userId));
+    }; 
+
     return (
         <div className='mt-16 mx-auto max-w-5xl p-4'>
             <h1 className='text-3xl font-bold text-center mb-8'>List Users</h1>
@@ -80,7 +84,7 @@ function ListUsers() {
                                 <td className='px-6 py-2 whitespace-nowrap text-sm text-gray-700'>{user.password}</td>
                                 <td className='px-6 py-2 whitespace-nowrap text-sm text-gray-700 space-x-2'>
                                     <button onClick={() => handleEditClick(user)} className='px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600'>Edit</button>
-                                    <button className='px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600'>Delete</button>
+                                    <button onClick={()=>handleDeleteClick(user._id)} className='px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600'>Delete</button>
                                 </td>
                             </tr>
                         ))}
