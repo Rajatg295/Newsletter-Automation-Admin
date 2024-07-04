@@ -1,0 +1,38 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Fixed sidebar */
+  .sidebar {
+    @apply fixed top-0 left-0 h-full bg-gray-800 text-white shadow-lg;
+    width: 256px;
+  }
+  
+  /* Fixed header */
+  .header {
+    @apply fixed top-0 w-full bg-blue-800 text-white flex items-center shadow-lg;
+    left: 256px;
+    height: 60px;
+    padding-left: 1rem;
+    padding-right: 300px;
+  }
+  
+  /* Fixed footer */
+  .footer {
+    @apply fixed bottom-0 w-full bg-blue-800 text-white flex items-center justify-center shadow-lg;
+    left: 256px;
+    height: 40px;
+  }
+  
+  /* Main content */
+  .main-content {
+    @apply relative p-4 overflow-y-auto;
+    margin-top: 60px;
+    margin-left: 256px;
+    margin-bottom: 40px;
+    height: calc(100vh - 100px);
+  }
+  
