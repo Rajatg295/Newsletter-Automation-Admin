@@ -73,7 +73,7 @@ const Sidenavbar = () => {
             </li>
             <li className="flex items-center">
               <FontAwesomeIcon icon={faMailBulk} className="mr-2" />
-              <Link to="/email-collection" className="hover:text-gray-400">Email Collection</Link>
+              <Link to="/email-collection" className="hover:text-gray-400">Subscribers</Link>
             </li>
             <li className="flex items-center">
               <FontAwesomeIcon icon={faClipboardList} className="mr-2" />
