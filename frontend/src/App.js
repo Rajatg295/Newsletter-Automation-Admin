@@ -11,6 +11,8 @@ import { AppContext } from './context/AppContext';
 import Permissions from './Permissions';
 import EmailCollection from './EmailCollection';
 import ListUsers from './ListUsers';
+import TemplateForm from './TemplateForm'
+import EmailScheduling from './EmailScheduling';
 
 function App() {
   const { login } = useContext(AppContext);
@@ -34,6 +36,8 @@ function App() {
                 <Route path="/user-management/permissions" element={<Permissions />} />
                 <Route path="/email-collection" element={<EmailCollection />} />
                 <Route path="/user-management/list" element={<ListUsers />} />
+                <Route path="/templates" element={<TemplateForm />} />
+                <Route path="/email-scheduling" element={<EmailScheduling />} />
               </Routes>
             </main>
           </div>

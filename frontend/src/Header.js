@@ -1,5 +1,5 @@
   import React, { useContext } from 'react';
-  import userProfileImage from './logo.svg';
+  import userProfileImage from './logo1.png';
   import { AppContext } from './context/AppContext';
   import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
   import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
@@ -20,7 +20,7 @@
       {login ? (
       <header className="bg-blue-800 text-white ml-[256px] h-16 flex items-center fixed top-0 left-0 w-full pl-4 pr-[300px] shadow-lg">
         <div className="flex-1 flex justify-between items-center">
-          <h1 className="text-lg font-semibold"></h1>
+          <h1 className="text-lg font-semibold">Admin Dashboard - Newsletter</h1>
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
               <img src={userProfileImage} alt="User Profile" className="w-8 h-8 rounded-full" />

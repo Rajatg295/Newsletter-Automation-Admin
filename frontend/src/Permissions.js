@@ -13,7 +13,9 @@ function Permissions() {
         const fetchUsers = async () => {
             try {
                 const response = await axios.get('http://localhost:5000/api/users');
-                setUsers(response.data);
+                const hiddenUsers = JSON.parse(localStorage.getItem('hiddenUsers')) || [];
+                const filteredUsers = response.data.filter(user => !hiddenUsers.includes(user._id));
+                setUsers(filteredUsers);
             } catch (error) {
                 console.error('Error fetching users', error);
             }

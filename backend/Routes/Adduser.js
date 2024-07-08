@@ -5,7 +5,6 @@ const router = express.Router();
 
 router.post('/registeruser', upload.single('image'), createMember);
 router.get('/users',getUsers);
-router.put('/users/:id',putUsers);
-router.delete('/users/:id', deleteUser);
-
+router.put('/users/update/:id',putUsers);
+router.delete('/users/delete/:id', deleteUser);
 module.exports = router;

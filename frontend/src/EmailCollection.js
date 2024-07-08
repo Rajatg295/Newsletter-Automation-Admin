@@ -18,7 +18,7 @@ const EmailCollection = () => {
     }, []);
 
     return (
-        <div className="p-5">
+        <div className="p-5 mt-[90px]">
             <h1 className="text-2xl font-semibold mb-4">Email Collection</h1>
             <table className="w-full bg-white border border-gray-300">
                 <thead>

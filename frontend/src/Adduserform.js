@@ -37,7 +37,7 @@ const Adduserform = () => {
         formDataToSend.append('role', formData.role);
 
         try {
-            console.log('Form data:', formData);
+            
             const response = await axios.post('http://localhost:5000/api/registeruser', formDataToSend, {
                 headers: {
                     'Content-Type': 'multipart/form-data',

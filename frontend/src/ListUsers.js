@@ -5,27 +5,25 @@ function ListUsers() {
     const [users, setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState(null);
     const [editForm, setEditForm] = useState({ name: '', email: '', password: '' });
-        
-    const handleEditClick = (user) => {
-        if (selectedUser && selectedUser._id === user._id) {
-            setSelectedUser(null);
-        } else {
-            setSelectedUser(user);
-            setEditForm({ name: user.name, email: user.email, password: user.password });
-        }
-    };
 
     useEffect(() => {
         const fetchUsers = async () => {
             try {
                 const response = await axios.get('http://localhost:5000/api/users');
-                setUsers(response.data);
+                const hiddenUsers = JSON.parse(localStorage.getItem('hiddenUsers')) || [];
+                const filteredUsers = response.data.filter(user => !hiddenUsers.includes(user._id));
+                setUsers(filteredUsers);
             } catch (error) {
                 console.error('Error fetching users', error);
             }
         };
         fetchUsers();
     }, []);
+
+    const handleEditClick = (user) => {
+        setSelectedUser(user);
+        setEditForm({ name: user.name, email: user.email, password: user.password });
+    };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -38,16 +36,7 @@ function ListUsers() {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
-
-            const formData = new FormData();
-            formData.append('name', editForm.name);
-            formData.append('email', editForm.email);
-            formData.append('password', editForm.password);
-
-
-            await axios.put(`http://localhost:5000/api/users/${selectedUser._id}`, formData,{
-                headers: { 'Content-Type': 'multipart/form-data' }
-            });
+            await axios.put(`http://localhost:5000/api/users/update/${selectedUser._id}`, editForm);
             setUsers((prevUsers) =>
                 prevUsers.map((user) =>
                     user._id === selectedUser._id ? { ...user, ...editForm } : user
@@ -59,9 +48,12 @@ function ListUsers() {
         }
     };
 
-    const handleDeleteClick = (userId) => {
-        setUsers((prevUsers) => prevUsers.filter((user) => user._id !== userId));
-    }; 
+    const handleHideClick = (id) => {
+        setUsers((prevUsers) => prevUsers.filter((user) => user._id !== id));
+        const hiddenUsers = JSON.parse(localStorage.getItem('hiddenUsers')) || [];
+        hiddenUsers.push(id);
+        localStorage.setItem('hiddenUsers', JSON.stringify(hiddenUsers));
+    };
 
     return (
         <div className='mt-16 mx-auto max-w-5xl p-4'>
@@ -84,14 +76,14 @@ function ListUsers() {
                                 <td className='px-6 py-2 whitespace-nowrap text-sm text-gray-700'>{user.password}</td>
                                 <td className='px-6 py-2 whitespace-nowrap text-sm text-gray-700 space-x-2'>
                                     <button onClick={() => handleEditClick(user)} className='px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600'>Edit</button>
-                                    <button onClick={()=>handleDeleteClick(user._id)} className='px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600'>Delete</button>
+                                    <button onClick={() => handleHideClick(user._id)} className='px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600'>Delete</button>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             </div>
-            
+
             {selectedUser && (
                 <>
                     <h2 className="text-xl font-semibold mb-4">Edit details of {selectedUser.name}</h2>
@@ -138,3 +130,4 @@ function ListUsers() {
 }
 
 export default ListUsers;
+

@@ -1,4 +1,6 @@
 /* General reset */
+
+
 * {
     margin: 0;
     padding: 0;
@@ -34,5 +36,17 @@
     margin-left: 256px;
     margin-bottom: 40px;
     height: calc(100vh - 100px);
+  }
+  
+
+  .svglfg{
+    height: calc(100vh - 105.6px);
+    overflow:  auto;
+    margin-top: 64px;
+    padding-top: 20px;
+  }
+
+  .prose img {
+    max-width: 40%;
   }
   
